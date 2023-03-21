@@ -24,7 +24,7 @@
     <ProjectGuid>{a26beb99-cfd4-4ffb-be56-12710dfd4fc7}</ProjectGuid>
     <RootNamespace>LearningVulkan</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>VulkanPart10</ProjectName>
+    <ProjectName>VulkanPart8</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="first_app.hpp" />
-    <ClInclude Include="lve_game_object.hpp" />
     <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
     <ClInclude Include="lve_window.hpp" />
