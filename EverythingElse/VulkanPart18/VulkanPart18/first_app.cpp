@@ -64,7 +64,7 @@ namespace lve
 	void FirstApp::loadGameObjects()
 	{
 		std::shared_ptr<LveModel> lveModel =
-			LveModel::createModelFromFile(lveDevice, "models/colored_cube.obj");
+			LveModel::createModelFromFile(lveDevice, "models/flat_vase.obj");
 		auto gameObj = LveGameObject::createGameObject();
 		gameObj.model = lveModel;
 		gameObj.transform.translation = { .0f, .0f, 2.5f };

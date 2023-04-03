@@ -5,7 +5,6 @@
     <None Include="simple_shader.frag" />
     <None Include="simple_shader.frag.spv" />
     <None Include="simple_shader.vert" />
-    <None Include="simple_shader.vert.spv" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
