@@ -24,7 +24,7 @@
     <ProjectGuid>{a26beb99-cfd4-4ffb-be56-12710dfd4fc7}</ProjectGuid>
     <RootNamespace>LearningVulkan</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>VulkanPart24</ProjectName>
+    <ProjectName>VulkanPart23</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
