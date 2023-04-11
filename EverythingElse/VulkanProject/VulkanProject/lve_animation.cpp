@@ -1,5 +1,6 @@
 #include "lve_animation.hpp"
 #include <iostream>
+#include <numbers>
 
 namespace lve
 {
@@ -7,25 +8,102 @@ namespace lve
 	{
 		gameObject = nullptr;
 		currentTime = 0;
-		currentKeyframe = 0;
+		currentKeyframeIndex = 0;
 	}
 
-	LveAnimation::LveAnimation(LveGameObject* obj, std::vector<glm::vec3> frames) 
-		: gameObject{ obj }, translationKeyFrame{frames}
+	LveAnimation::LveAnimation(LveGameObject* obj, std::vector<LveKeyframe> frames) 
+		: gameObject{ obj }, keyframes{frames}
 	{
 		currentTime = 0;
-		currentKeyframe = 0;
+		currentKeyframeIndex = 0;
 	}
 
 	void LveAnimation::calculateTransform(float delta)
 	{
 		currentTime += delta;
-		if (currentTime > static_cast<float>(currentKeyframe))
+
+		// Key Previous key and current key
+		LveKeyframe key0 = keyframes[currentKeyframeIndex];
+		LveKeyframe key1 = keyframes[(currentKeyframeIndex + 1) % keyframes.size()];
+
+		// Check if its time for the next keyframe
+		if (currentTime > key1.keyTime)
 		{
-			currentKeyframe = (currentKeyframe + 1) % translationKeyFrame.size();
+			std::cout << "currentKeyFrameIndex: " << currentKeyframeIndex << "\n";
+			currentKeyframeIndex = (currentKeyframeIndex + 1) % keyframes.size();
+			currentTime = 0;
 		}
-		std::cout << "currentKeyFrameIndex: " << currentKeyframe << "\n";
-		gameObject->transform.translation = translationKeyFrame[currentKeyframe];
+
+		// t is a 0 - 1 of time between two keyframes
+		float t = currentTime / key1.keyTime;
+
+		// Translation Interpolation
+		if (key0.translation != nullptr)
+		{
+
+			// Get the translation values for x,y,z
+			float x0 = key0.translation->x;
+			float y0 = key0.translation->y;
+			float z0 = key0.translation->z;
+
+			float x1 = key1.translation->x;
+			float y1 = key1.translation->y;
+			float z1 = key1.translation->z;
+
+
+
+			glm::vec3 interpolatedPosition = {
+				lerp(x0, x1, t),
+				lerp(y0, y1, t),
+				lerp(z0, z1, t)
+			};
+
+			gameObject->transform.translation = interpolatedPosition;
+		}
+
+		// Rotation Interpolation
+		if (key0.rotation != nullptr)
+		{
+			// Get the translation values for x,y,z
+			float x0 = key0.rotation->x;
+			float y0 = key0.rotation->y;
+			float z0 = key0.rotation->z;
+
+			float x1 = key1.rotation->x;
+			float y1 = key1.rotation->y;
+			float z1 = key1.rotation->z;
+
+			glm::vec3 interpolatedRotation = {
+				lerp(x0, x1, t),
+				lerp(y0, y1, t),
+				lerp(z0, z1, t)
+			};
+
+			gameObject->transform.rotation = interpolatedRotation;
+		}
+
+		// Scale Interpolation
+		if (key0.scale != nullptr)
+		{
+			// Get the translation values for x,y,z
+			float x0 = key0.scale->x;
+			float y0 = key0.scale->y;
+			float z0 = key0.scale->z;
+
+			float x1 = key1.scale->x;
+			float y1 = key1.scale->y;
+			float z1 = key1.scale->z;
+
+			glm::vec3 interpolatedScale = {
+				lerp(x0, x1, t),
+				lerp(y0, y1, t),
+				lerp(z0, z1, t)
+			};
+
+			gameObject->transform.scale = interpolatedScale;
+		}
+		
+
 		//std::cout << "Y component: " << gameObject->transform.translation.y << "\n";
 		//std::cout << "Y component: " << gameObject->transform.translation. << "\n";
 	}
@@ -33,10 +111,5 @@ namespace lve
 	float LveAnimation::lerp(float a, float b, float t)
 	{
 		return (1 - t) * a + t * b;
-	}
-
-	float LveAnimation::animationLength()
-	{
-		return static_cast<float>(translationKeyFrame.size());
-	}
+	}	
 }

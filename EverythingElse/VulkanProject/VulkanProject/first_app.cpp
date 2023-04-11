@@ -144,11 +144,7 @@ namespace lve
 		smoothVase.transform.translation = { .5f, .5f, 0.f };
 		smoothVase.transform.scale = { 3.f, 1.5f, 3.f };
 		gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
-		animation = LveAnimation(&gameObjects.at(smoothVase.getId()), {
-			{ .5f, .5f, 0.f },
-			{ .5f, 0.75f, 0.f},
-			{ .5f, 1.f, 0.f}
-		});
+		animation = LveAnimation(&gameObjects.at(smoothVase.getId()), JUMP);
 
 		lveModel = LveModel::createModelFromFile(lveDevice, "models/quad.obj");
 		auto floor = LveGameObject::createGameObject();

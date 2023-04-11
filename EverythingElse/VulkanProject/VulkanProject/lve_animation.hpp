@@ -1,5 +1,6 @@
 #pragma once
 #include "lve_game_object.hpp"
+#include "lve_keyframe.h"
 
 namespace lve
 {
@@ -7,16 +8,21 @@ namespace lve
 	{
 	public:
 		LveAnimation();
-		LveAnimation(LveGameObject* obj, std::vector<glm::vec3> frames);
+		LveAnimation(LveGameObject* obj, std::vector<LveKeyframe> frames);
 		void calculateTransform(float delta);
 
 	private:
 		LveGameObject* gameObject;
-		std::vector<glm::vec3> translationKeyFrame;
+		
+		glm::vec3 defaultTranslation;
+		glm::vec3 defaultRotation;
+		glm::vec3 defaultScale;
+		
+		std::vector<LveKeyframe> keyframes;
+
 		float currentTime;
-		int currentKeyframe;
+		int currentKeyframeIndex;
 
 		float lerp(float a, float b, float t);
-		float animationLength();
 	};
 }

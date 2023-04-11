@@ -78,6 +78,9 @@
     <ClInclude Include="lve_animation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lve_keyframe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="first_app.cpp">

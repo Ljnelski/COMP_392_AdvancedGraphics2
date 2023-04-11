@@ -156,6 +156,7 @@
     <ClInclude Include="lve_device.hpp" />
     <ClInclude Include="lve_frame_info.hpp" />
     <ClInclude Include="lve_game_object.hpp" />
+    <ClInclude Include="lve_keyframe.h" />
     <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
     <ClInclude Include="lve_renderer.hpp" />
