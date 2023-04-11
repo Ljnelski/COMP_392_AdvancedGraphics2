@@ -18,6 +18,7 @@
 #include <chrono>
 #include <stdexcept>
 #include "lve_frame_info.hpp"
+#include "lve_animation.hpp"
 
 namespace lve
 {
@@ -52,7 +53,7 @@ namespace lve
 				VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
 				VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
-			uboBuffers[i]->map();			
+			uboBuffers[i]->map();
 		}
 
 		auto globalSetLayout = LveDescriptorSetLayout::Builder(lveDevice)
@@ -68,7 +69,7 @@ namespace lve
 				.build(globalDescriptorSets[i]);
 		}
 
-		SimpleRenderSystem simpleRenderSystem{ 
+		SimpleRenderSystem simpleRenderSystem{
 			lveDevice,
 			lveRenderer.getSwapChainRenderPass(),
 			globalSetLayout->getDescriptorSetLayout()
@@ -85,6 +86,7 @@ namespace lve
 		KeyboardMovementController cameraController{};
 
 		auto currentTime = std::chrono::high_resolution_clock::now();
+
 		while (!lveWindow.shouldClose())
 		{
 			glfwPollEvents();
@@ -97,13 +99,16 @@ namespace lve
 			cameraController.moveInPlaneXZ(lveWindow.getGLFWwindow(), frameTime, viewerObject);
 			camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
 
+			// Run animation			
+			animation.calculateTransform(frameTime);
+
 			float aspect = lveRenderer.getAspectRatio();
 			camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 100.f);
 
 			if (auto commandBuffer = lveRenderer.beginFrame())
 			{
 				int frameIndex = lveRenderer.getFrameIndex();
-				FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex], gameObjects};
+				FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex], gameObjects };
 
 				// update
 				GlobalUbo ubo{};
@@ -139,7 +144,12 @@ namespace lve
 		smoothVase.transform.translation = { .5f, .5f, 0.f };
 		smoothVase.transform.scale = { 3.f, 1.5f, 3.f };
 		gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
-		
+		animation = LveAnimation(&gameObjects.at(smoothVase.getId()), {
+			{ .5f, .5f, 0.f },
+			{ .5f, 0.75f, 0.f},
+			{ .5f, 1.f, 0.f}
+		});
+
 		lveModel = LveModel::createModelFromFile(lveDevice, "models/quad.obj");
 		auto floor = LveGameObject::createGameObject();
 		floor.model = lveModel;

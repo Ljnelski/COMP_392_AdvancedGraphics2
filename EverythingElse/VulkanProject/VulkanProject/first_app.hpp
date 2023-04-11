@@ -1,5 +1,6 @@
 #pragma once
 
+#include "lve_animation.hpp"
 #include "lve_descriptors.hpp"
 #include "lve_device.hpp"
 #include "lve_game_object.hpp"
@@ -36,5 +37,6 @@ namespace lve
 
 		std::unique_ptr<LveDescriptorPool> globalPool{};
 		LveGameObject::Map gameObjects;
+		LveAnimation animation;
 	};
 }

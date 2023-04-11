@@ -75,6 +75,9 @@
     <ClInclude Include="point_light_system.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lve_animation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="first_app.cpp">
@@ -120,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="point_light_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
