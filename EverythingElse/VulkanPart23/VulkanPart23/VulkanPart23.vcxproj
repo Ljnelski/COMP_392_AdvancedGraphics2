@@ -24,7 +24,7 @@
     <ProjectGuid>{a26beb99-cfd4-4ffb-be56-12710dfd4fc7}</ProjectGuid>
     <RootNamespace>LearningVulkan</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>VulkanPart24</ProjectName>
+    <ProjectName>VulkanPart23</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -136,12 +136,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\..\VulkanPart19\VulkanPart19\simple_shader.vert.spv" />
     <None Include="compile.bat">
       <FileType>Document</FileType>
     </None>
-    <None Include="point_light.frag" />
-    <None Include="point_light.vert" />
     <None Include="simple_shader.frag" />
     <None Include="simple_shader.frag.spv" />
     <None Include="simple_shader.vert" />
@@ -161,7 +158,6 @@
     <ClInclude Include="lve_swap_chain.hpp" />
     <ClInclude Include="lve_utils.hpp" />
     <ClInclude Include="lve_window.hpp" />
-    <ClInclude Include="point_light_system.hpp" />
     <ClInclude Include="simple_render_system.hpp" />
     <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
@@ -179,7 +175,6 @@
     <ClCompile Include="lve_swap_chain.cpp" />
     <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="point_light_system.cpp" />
     <ClCompile Include="simple_render_system.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

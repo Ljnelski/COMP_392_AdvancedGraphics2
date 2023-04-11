@@ -5,9 +5,6 @@
     <None Include="simple_shader.frag" />
     <None Include="simple_shader.frag.spv" />
     <None Include="simple_shader.vert" />
-    <None Include="..\..\VulkanPart19\VulkanPart19\simple_shader.vert.spv" />
-    <None Include="point_light.vert" />
-    <None Include="point_light.frag" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -72,9 +69,6 @@
     <ClInclude Include="lve_descriptors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="point_light_system.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="first_app.cpp">
@@ -117,9 +111,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lve_descriptors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="point_light_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
