@@ -29,11 +29,11 @@ namespace lve
 		// Check if its time for the next keyframe
 		if (currentTime > key1.keyTime)
 		{
-			std::cout << "currentKeyFrameIndex: " << currentKeyframeIndex << "\n";
+			//std::cout << "currentKeyFrameIndex: " << currentKeyframeIndex << "\n";
 			currentKeyframeIndex = (currentKeyframeIndex + 1) % keyframes.size();
 			currentTime = 0;
 		}
-		std::cout << "Current Time: " << currentTime << "\n";
+		//std::cout << "Current Time: " << currentTime << "\n";
 		// t is a 0 - 1 of time between two keyframes
 		float t = currentTime / key1.keyTime;
 

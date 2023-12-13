@@ -1,4 +1,3 @@
-// Vulkan Part 12
 
 #include "first_app.hpp"
 #include <cstdlib>
