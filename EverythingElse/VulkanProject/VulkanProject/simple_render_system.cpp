@@ -71,8 +71,8 @@ namespace lve
 			frameInfo.commandBuffer,
 			VK_PIPELINE_BIND_POINT_GRAPHICS,
 			pipelineLayout,
-			0, 
-			1, 
+			0,
+			1,
 			&frameInfo.globalDescriptorSet,
 			0,
 			nullptr);

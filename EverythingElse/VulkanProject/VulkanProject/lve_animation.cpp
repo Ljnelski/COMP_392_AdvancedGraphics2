@@ -9,11 +9,18 @@ namespace lve
 		gameObject = nullptr;
 		currentTime = 0;
 		currentKeyframeIndex = 0;
+
+		defaultTranslation = { 0.f,0.f,0.f };
+		defaultRotation = { 0.f,0.f,0.f };
+		defaultScale = { 1.f,1.f,1.f };
 	}
 
 	LveAnimation::LveAnimation(LveGameObject* obj, std::vector<LveKeyframe> frames)
 		: gameObject{ obj }, keyframes{ frames }
 	{
+		defaultTranslation = gameObject->transform.translation;
+		defaultRotation = gameObject->transform.rotation;
+		defaultScale = gameObject->transform.scale;
 		currentTime = 0;
 		currentKeyframeIndex = 0;
 	}
@@ -60,7 +67,7 @@ namespace lve
 					lerp(z0, z1, t)
 				};
 
-				gameObject->transform.translation = interpolatedPosition;
+				gameObject->transform.translation = defaultTranslation + interpolatedPosition;
 			}
 
 			// Rotation Interpolation
@@ -81,7 +88,7 @@ namespace lve
 					lerp(z0, z1, t)
 				};
 
-				gameObject->transform.rotation = interpolatedRotation;
+				gameObject->transform.rotation = defaultRotation + interpolatedRotation;
 			}
 
 			// Scale Interpolation
@@ -102,7 +109,7 @@ namespace lve
 					lerp(z0, z1, t)
 				};
 
-				gameObject->transform.scale = interpolatedScale;
+				gameObject->transform.scale = defaultScale * interpolatedScale;
 			}
 		}
 

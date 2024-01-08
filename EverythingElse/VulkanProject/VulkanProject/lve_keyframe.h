@@ -15,23 +15,23 @@ namespace lve
 
 	const static std::vector<LveKeyframe> RISE_AND_FALL = {
 		{
-			new glm::vec3{ .5f, .5f, 0.f },
-			nullptr,
-			nullptr,
-			1.f
-		},
-		{
-			new glm::vec3{ .5f, 0.25f, 0.f},
-			nullptr,
-			nullptr,
-			1.f
-		},
-		{
 			new glm::vec3{.5f, 0.f, 0.f},
 			nullptr,
 			nullptr,
 			1.f
-		}
+		},
+		{
+			new glm::vec3{ .5f, -.25f, 0.f },
+			nullptr,
+			nullptr,
+			1.f
+		},
+		{
+			new glm::vec3{ .5f, -0.5f, 0.f},
+			nullptr,
+			nullptr,
+			1.f
+		}		
 	};
 
 	const static std::vector<LveKeyframe> WOBBLE = {

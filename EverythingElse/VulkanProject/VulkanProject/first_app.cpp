@@ -26,7 +26,7 @@ namespace lve
 	{
 		glm::mat4 projection{ 1.f };
 		glm::mat4 view{ 1.f };
-		glm::vec4 ambientLightColor{ 1.f,1.f,1.f, 0.02f };
+		glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, 0.02f };
 		glm::vec3 lightPosition{ -1.f };
 		alignas(16) glm::vec4 lightColor{ 1.f };
 	};
@@ -100,7 +100,12 @@ namespace lve
 			camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
 
 			// Run animation			
-			animation.calculateTransform(frameTime);
+			//animation.calculateTransform(frameTime);
+
+			for (auto animation: animations)
+			{
+				animation->calculateTransform(frameTime);
+			}
 
 			float aspect = lveRenderer.getAspectRatio();
 			camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 100.f);
@@ -130,6 +135,8 @@ namespace lve
 
 	void FirstApp::loadGameObjects()
 	{
+		animations = {};
+
 		std::shared_ptr<LveModel> lveModel =
 			LveModel::createModelFromFile(lveDevice, "models/flat_vase.obj");
 		auto flatVase = LveGameObject::createGameObject();
@@ -144,7 +151,8 @@ namespace lve
 		smoothVase.transform.translation = { .5f, .5f, 0.f };
 		smoothVase.transform.scale = { 3.f, 1.5f, 3.f };
 		gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
-		animation = LveAnimation(&gameObjects.at(smoothVase.getId()), WOBBLE);
+		animations.push_back(new LveAnimation(&gameObjects.at(smoothVase.getId()), WOBBLE));
+		
 
 		lveModel = LveModel::createModelFromFile(lveDevice, "models/quad.obj");
 		auto floor = LveGameObject::createGameObject();
@@ -152,5 +160,32 @@ namespace lve
 		floor.transform.translation = { 0.f, .5f, 0.f };
 		floor.transform.scale = { 3.f, 1.f, 3.f };
 		gameObjects.emplace(floor.getId(), std::move(floor));
+
+		lveModel = LveModel::createModelFromFile(lveDevice, "models/cube.obj");
+		auto cube = LveGameObject::createGameObject();
+		cube.model = lveModel;
+		cube.transform.translation = { 0.f, .3f, 1.5f };
+		cube.transform.scale = { .2f, .2f, .2f };
+		cube.transform.rotation = { 0.f, 1.f, 0.f};
+		gameObjects.emplace(cube.getId(), std::move(cube));
+		animations.push_back(new LveAnimation(&gameObjects.at(cube.getId()), RISE_AND_FALL));
+
+		lveModel = LveModel::createModelFromFile(lveDevice, "models/Brother_Previs_1.0.obj");
+		auto brother = LveGameObject::createGameObject();
+		brother.model = lveModel;
+		brother.transform.translation = { 1.f, .3f, 1.5f };
+		brother.transform.scale = { 1.f, 1.f, 1.f };
+		brother.transform.rotation = { 0.f, 0.f, 0.f };
+		gameObjects.emplace(brother.getId(), std::move(brother));
+		animations.push_back(new LveAnimation(&gameObjects.at(brother.getId()), WOBBLE));
+				
+		lveModel = LveModel::createModelFromFile(lveDevice, "models/kid.obj");
+		auto kid = LveGameObject::createGameObject();
+		kid.model = lveModel;
+		kid.transform.translation = { -1.f, .3f, 1.5f };
+		kid.transform.scale = { .3f, .3f, .3f };
+		kid.transform.rotation = {0.f, 0.f, 0.f };
+		gameObjects.emplace(kid.getId(), std::move(kid));
+		animations.push_back(new LveAnimation(&gameObjects.at(kid.getId()), GROW_AND_SHRINK));
 	}
 }  // namespace lve

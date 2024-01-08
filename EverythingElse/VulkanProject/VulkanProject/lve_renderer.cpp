@@ -5,8 +5,7 @@
 #include <array>
 
 namespace lve
-{	
-
+{
 	LveRenderer::LveRenderer(LveWindow& window, LveDevice& device) : lveWindow{ window }, lveDevice{ device }
 	{
 		recreateSwapChain();
@@ -15,7 +14,7 @@ namespace lve
 	LveRenderer::~LveRenderer()
 	{
 		freeCommandBuffers();
-	}	
+	}
 
 	void LveRenderer::recreateSwapChain()
 	{
@@ -39,7 +38,7 @@ namespace lve
 			if (!oldSwapChain->compareSwapChainFormats(*lveSwapChain.get()))
 			{
 				throw std::runtime_error("Swap chain image(or depth) format has changed");
-			}			
+			}
 		}
 	}
 	void LveRenderer::createCommandBuffers()

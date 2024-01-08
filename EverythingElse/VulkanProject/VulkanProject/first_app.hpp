@@ -37,6 +37,7 @@ namespace lve
 
 		std::unique_ptr<LveDescriptorPool> globalPool{};
 		LveGameObject::Map gameObjects;
+		std::vector<LveAnimation*> animations;
 		LveAnimation animation;
 	};
 }
